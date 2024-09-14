@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plagiarism Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Plagiarism Checker</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="published_article">Upload Published Article (PDF/DOCX):</label>
+            <input type="file" name="published_article" required><br><br>
+
+            <label for="new_submission">Upload New Manuscript (PDF/DOCX):</label>
+            <input type="file" name="new_submission" required><br><br>
+
+            <button type="submit">Compare Articles</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="messages">
+              {% for message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        {% if rejected %}
+            <h2>Result: Rejected</h2>
+            <p>Plagiarism detected: {{ plagiarism_percentage }}%</p>
+            <h3>Plagiarized Sections:</h3>
+            <ul>
+                {% for section in plagiarized_content %}
+                    <li>{{ section }}</li>
+                {% endfor %}
+            </ul>
+        {% elif plagiarism_percentage is not none %}
+            <h2>Result: Accepted</h2>
+            <p>Plagiarism percentage: {{ plagiarism_percentage }}%</p>
+        {% endif %}
+    </div>
+</body>
+</html>
