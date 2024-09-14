@@ -10,11 +10,17 @@ The Flask Plagiarism Checker is a web application that detects plagiarism betwee
 
 ## Technology Stack
 -Backend: Python, Flask
+
 -Frontend: HTML, CSS (for styling)
+
 -Libraries: 
+
 PyPDF2 for PDF extraction.
+
 python-docx for DOCX extraction.
+
 difflib for text comparison.
+
 Other: Virtual environment (venv), file upload handling.
 
 ## Setup
